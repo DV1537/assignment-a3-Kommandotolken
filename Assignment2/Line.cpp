@@ -21,18 +21,25 @@ public:
 		coord = new float[counter];
 		std::copy(floatArray, floatArray + counter, coord);
 	}
-
-
-
-	void operator=(const Line &l)
+	void operator+(const float[])
 	{
-		this->counter = l.counter;
-		this->coord = l.coord;
+		std::cout << "This operator does not work on line.";
+	}
+
+	void operator+(Shape &l)
+	{
 
 	}
-	void operator<<(const Line &l) {
+	void operator=(const Shape &l)
+	{
+		std::cout << "No reason to deepcopy this object.";
 
-		std::cout << "The vertices are: \n";
+	}
+
+
+	void operator<<(const Shape &l) {
+
+		std::cout << "The vertices for this line are: \n";
 		for (int i = 0; i < 3; i += 2)
 		{
 			std::cout << "(" << coord[i] << " , " << coord[i + 1] << ") \n";
@@ -78,13 +85,24 @@ public:
 	}
 
 
+	float * getCoord() {
 
+	}
+	int getNumberOfPoints() {
+
+	}
 	float distance(Shape *s) {
 		float * sCoord = s->position() + 0;
 		float d = sqrt(pow(sCoord[0] - coord[0], 2) + pow(sCoord[1] - coord[1], 2));;
 		
 		return d;
 	}
-
-
+	void print() {
+		std::cout.precision(3);
+		std::cout << "The type is: " << getType() << "\n";
+		std::cout << "The area is: " << area() << "\n";
+		std::cout << "The circumference is: " << circumference() << "\n";
+		std::cout << "The center coordinate is: " << position()[0] << " and " << position()[1] << "\n";
+	}
 };
+

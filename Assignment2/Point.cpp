@@ -14,6 +14,10 @@ public:
 		type = "point";
 		std::copy(floatArray, floatArray + counter, coord);
 	}
+	 void operator+(const float[])
+	 {
+		 std::cout << "This operator does not work on point.";
+	 }
 
 	 void operator=(const Point &p)
 	 {
@@ -24,13 +28,21 @@ public:
 
 	 }
 
-	 void operator+(const Point &p)
+	 void operator=(const Shape &p)
 	 {
-		 std::cout << "plus";
+
+		 std::cout << "You can only do this with points";
+
+
+	 }
+	 void operator+(Shape &p)
+	 {
+		 
+
 	 }
 
-	 void operator<<(const Point &p) {
-		 std::cout << "The vertices are: \n";
+	 void operator<<(const Shape &p) {
+		 std::cout << "The vertices for this point are: \n";
 		 std::cout << "(" << coord[0] << " , " << coord[1];
 	 }
 	std::string getType() {
@@ -68,5 +80,12 @@ public:
 		float * sCoord = s->position() + 0;
 		float d = sqrt(pow(sCoord[0] - coord[0], 2) + pow(sCoord[1] - coord[1], 2));
 		return d;
+	}
+	void print() {
+		std::cout.precision(3);
+		std::cout << "The type is: " << getType() << "\n";
+		std::cout << "The area is: " << area() << "\n";
+		std::cout << "The circumference is: " << circumference() << "\n";
+		std::cout << "The center coordinate is: " << position()[0] << " and " << position()[1] << "\n";
 	}
 };

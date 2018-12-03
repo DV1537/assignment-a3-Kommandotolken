@@ -30,17 +30,20 @@ public:
 		
 	}
 	
-	void operator+(float points[2])
+	void operator=(const Shape &t)
 	{
-		float * extraCoords = new float[counter + 2];
-		std::copy(coord, coord + (counter + 2), extraCoords);
-		//Hämta float * med coords. Hitta slutet på den. Mata in points efter den
-		counter += 2;
-		delete[] coord;
-		coord = extraCoords;
+		std::cout << "You can only do this with triangles.";
 	}
-	void operator<<(const Triangle &t) {
-		std::cout << "The vertices of the triangle are: \n";
+
+	void operator+(const float[])
+	{
+		std::cout << "This operator does not work on Triangle.";
+	}
+	void operator+(Shape &s) {
+		
+	}
+	void operator<<(const Shape &t) {
+		std::cout << "The vertices for this triangle are: \n";
 		int j = 0;
 		
 		for (int i = 0; i < 3; i++)
@@ -127,5 +130,12 @@ public:
 
 	std::string getType() {
 		return type;
+	}
+	void print() {
+		std::cout.precision(3);
+		std::cout << "The type is: " << getType() << "\n";
+		std::cout << "The area is: " << area() << "\n";
+		std::cout << "The circumference is: " << circumference() << "\n";
+		std::cout << "The center coordinate is: " << position()[0] << " and " << position()[1] << "\n";
 	}
 };

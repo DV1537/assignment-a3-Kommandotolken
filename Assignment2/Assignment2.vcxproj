@@ -154,6 +154,7 @@
     <ClInclude Include="Functions.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assignment2.cpp" />
