@@ -10,7 +10,7 @@ private:
 	float polyArea;
 	int capacity = 10;
 	bool isConv;
-	int numberOfPoints = 0;
+	int numberOfPoints;
 	int numOfSides;
 	float centerCoord[2];
 	float * xCoord;
@@ -21,7 +21,7 @@ public:
 
 	~Polygon()
 	{
-		
+		//delete this;
 		delete[] xCoord;
 		delete[] yCoord;
 	}
@@ -92,6 +92,7 @@ public:
 		
 	}
 	void operator<<(const Shape &s) {
+		
 		std::cout << "The vertices for this " << type << " are: \n";
 		int j = 0;
 		for (int i = 0; i < numOfSides; i++)
@@ -104,9 +105,12 @@ public:
 		this->numberOfPoints = numberOfPoints;
 		
 		numOfSides = numberOfPoints / 2;
-		coord = floatArray;
+		coord = new float[numberOfPoints];
 		std::copy(floatArray, floatArray + numberOfPoints, coord);
-	
+		for (int i = 0; i < numberOfPoints; i++)
+		{
+			std::cout << *(coord + i);
+		}
 		this->xCoord = new float[numOfSides];
 		this->yCoord = new float[numOfSides];
 		if (numberOfPoints == 2)
@@ -184,6 +188,16 @@ public:
 		int l = numOfSides - 1;
 		if (type == "point" || type == "line")
 			polyCircumference = -1;
+		else if (type == "triangle")
+		{
+			int l = 2;
+			for (int n = 0; n < 3; n++)
+			{
+
+				polyCircumference += sqrt(pow(xCoord[l] - xCoord[n], 2) + pow(yCoord[l] - yCoord[n], 2));
+				l = n;
+			}
+		}
 		else
 		{
 			for (int n = 0; n < numOfSides; n++)
@@ -218,13 +232,14 @@ public:
 		}
 		else if (type == "line")
 		{
-			centerX = (coord[2] - coord[0]) / 2;
-			centerY = (coord[3] - coord[1]) / 2;
+			centerX = (coord[2] + coord[0]) / 2;
+			centerY = (coord[3] + coord[1]) / 2;
 
 			centerCoord[0] = centerX;
 			centerCoord[1] = centerY;
 		}
-		else {
+		else if (type == "polygon")
+		{
 
 			if (isConv == false)
 			{
@@ -302,8 +317,9 @@ public:
 
 
 
-			return isConv;
+			
 		}
+		return isConv;
 	}
 
 

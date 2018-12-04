@@ -1,3 +1,4 @@
 ﻿  Assignment2.cpp
-c:\users\henrikasus\source\repos\assignment2\assignment2\polygon.cpp(307): warning C4715: 'Polygon::isConvex': not all control paths return a value
+  Polygon.cpp
+  Generating Code...
   Assignment2.vcxproj -> C:\Users\HenrikAsus\source\repos\Assignment2\Debug\Assignment2.exe
