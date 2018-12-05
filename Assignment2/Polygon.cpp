@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Functions.h"
 #include "Shape.h"
-#include "Vector.h"
+
 class Polygon : public Shape {
 private:
 	
@@ -15,13 +15,12 @@ private:
 	float centerCoord[2];
 	float * xCoord;
 	float  * yCoord;
-	Vector point;
+	
 
 public:
 
 	~Polygon()
 	{
-		//delete this;
 		delete[] xCoord;
 		delete[] yCoord;
 	}
@@ -296,7 +295,7 @@ public:
 			float angle;
 			float m = 0;
 
-			//If convex it can not self intersect
+			
 			for (int n = 0; n < numOfSides; n++)
 			{
 
@@ -337,8 +336,7 @@ public:
 		
 		for (int n = 0; n < numOfSides-1; n++)
 		{
-			//dx = xCoord[n + 1 % numOfSides] - xCoord[n];
-			//dy = yCoord[n + 1 % numOfSides] - yCoord[n];
+		
 		
 			dx = xCoord[n + 2 % numOfSides] - xCoord[n + 1 % numOfSides];
 			dy = yCoord[n + 2 % numOfSides] - yCoord[n + 1 % numOfSides];
@@ -375,11 +373,4 @@ public:
 		std::cout << "The center coordinate is: " << position()[0] << " and " << position()[1] << "\n";
 	}
 
-	int getNumberOfPoints() {
-		return numberOfPoints;
-	}
-
-	float * getCoord() {
-		return coord;
-	}
 };

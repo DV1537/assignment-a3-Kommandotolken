@@ -21,12 +21,9 @@ public:
 		coord = new float[counter];
 		std::copy(floatArray, floatArray + counter, coord);
 	}
-	void operator+(const float[])
-	{
-		std::cout << "This operator does not work on line.";
-	}
 
-	void operator+(Shape &l)
+
+	/*void operator+(Shape &l)
 	{
 
 	}
@@ -34,7 +31,7 @@ public:
 	{
 		std::cout << "No reason to deepcopy this object.";
 
-	}
+	}*/
 
 
 	void operator<<(const Shape &l) {
@@ -85,12 +82,7 @@ public:
 	}
 
 
-	float * getCoord() {
 
-	}
-	int getNumberOfPoints() {
-
-	}
 	float distance(Shape *s) {
 		float * sCoord = s->position() + 0;
 		float d = sqrt(pow(sCoord[0] - coord[0], 2) + pow(sCoord[1] - coord[1], 2));;

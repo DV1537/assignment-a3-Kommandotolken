@@ -6,7 +6,9 @@ private:
 	float * coord;
 	int counter;
 public:
-	
+	~Point() {
+		delete[] coord;
+	}
 	 Point(float * floatArray, int counter) {
 		
 		this->counter = counter;
@@ -35,12 +37,7 @@ public:
 
 
 	 }
-	 void operator+(Shape &p)
-	 {
-		 
-
-	 }
-
+	
 	 void operator<<(const Shape &p) {
 		 std::cout << "The vertices for this point are: \n";
 		 std::cout << "(" << coord[0] << " , " << coord[1];

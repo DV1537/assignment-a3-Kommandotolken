@@ -13,6 +13,10 @@ private:
 	float yCoord[3];
 	
 public:
+
+	~Triangle() {
+		delete[] coord;
+	}
 	Triangle(float * floatArray, int counter) {
 		this->counter = counter;
 		coord = floatArray;
