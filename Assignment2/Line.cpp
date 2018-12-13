@@ -3,7 +3,7 @@
 #include "Shape.h"
 class Line : public Shape {
 private:
-	int counter;
+	int numberOfPoints;
 	float * coord;
 	std::string type;
 	float centerPos[2];
@@ -13,25 +13,28 @@ public:
 		
 	}
 
-	Line(float * floatArray, int counter)
+	Line(float * floatArray, int numberOfPoints)
 	{
 		
 		type = "line";
-		this->counter = counter;
-		coord = new float[counter];
-		std::copy(floatArray, floatArray + counter, coord);
+		this->numberOfPoints = numberOfPoints;
+		coord = new float[numberOfPoints];
+		std::copy(floatArray, floatArray + numberOfPoints, coord);
 	}
 
 
-	/*void operator+(Shape &l)
+	
+	void operator=(const Line &l)
 	{
+		delete[] coord;
+		coord = new float[l.numberOfPoints];
+		for (int i = 0; i < l.numberOfPoints; i++)
+		{
+			coord[i] = *(l.coord + i);
+		}
+		
 
 	}
-	void operator=(const Shape &l)
-	{
-		std::cout << "No reason to deepcopy this object.";
-
-	}*/
 
 
 	void operator<<(const Shape &l) {
@@ -46,19 +49,19 @@ public:
 
 
 	
-	std::string getType() {
+	std::string getType() const {
 		return type;
 	}
 
 
-	float area() {
+	float area() const {
 		return -1;
 	}
 
 
 
 
-	float circumference() {
+	float circumference() const {
 		return 0;
 	}
 
@@ -77,17 +80,20 @@ public:
 
 
 
-	bool isConvex() {
+	bool isConvex() const{
 		return false;
 	}
 
 
 
-	float distance(Shape *s) {
+	float distance(Shape *s) const{
 		float * sCoord = s->position() + 0;
 		float d = sqrt(pow(sCoord[0] - coord[0], 2) + pow(sCoord[1] - coord[1], 2));;
 		
 		return d;
+	}
+	int getNumberOfPoints() const{
+		return 2;
 	}
 	void print() {
 		std::cout.precision(3);

@@ -6,7 +6,7 @@
 class Shape {
 private:
 
-	float * coord;
+	//float * coord;
 	int counter;
 	
 
@@ -14,7 +14,9 @@ public:
 
 	//Shape(float * a, int c);
 	//Shape();
-	
+	virtual ~Shape() {
+		std::cout << "Base destructor called.\n";
+	}
 	virtual void operator=(const Shape &s) = 0;
 	
 	virtual void operator+(const float[]) = 0;
@@ -23,9 +25,9 @@ public:
 	virtual float area() = 0;
 
 
-	virtual std::string getType() = 0;
+	virtual std::string getType() const = 0;
 
-	virtual float circumference() = 0;
+	virtual float circumference() const = 0;
 
 
 
@@ -33,14 +35,14 @@ public:
 
 
 
-	virtual bool isConvex() = 0;
+	virtual bool isConvex() const= 0;
 
 
 
-	virtual float distance(Shape *s) = 0;
+	virtual float distance(Shape *s) const = 0;
 
-	virtual float * getCoord() = 0; 
-	virtual int getNumberOfPoints() = 0;
+	virtual float * getCoord() const = 0; 
+	virtual int getNumberOfPoints() const = 0;
 	virtual void print() = 0;
 	
 

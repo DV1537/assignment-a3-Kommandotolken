@@ -4,17 +4,17 @@ class Point : public Shape {
 private:
 	std::string type;
 	float * coord;
-	int counter;
+	int numberOfPoints;
 public:
 	~Point() {
 		delete[] coord;
 	}
-	 Point(float * floatArray, int counter) {
+	 Point(float * floatArray, int numberOfPoints) {
 		
-		this->counter = counter;
+		this->numberOfPoints = numberOfPoints;
 		coord = floatArray;
 		type = "point";
-		std::copy(floatArray, floatArray + counter, coord);
+		std::copy(floatArray, floatArray + numberOfPoints, coord);
 	}
 	 void operator+(const float[])
 	 {
@@ -23,9 +23,14 @@ public:
 
 	 void operator=(const Point &p)
 	 {
-		 
-		 this->coord = p.coord;
-		 this->counter = p.counter;
+		 this->numberOfPoints = p.numberOfPoints;
+		 delete[] coord;
+		 coord = new float[p.numberOfPoints];
+		 for (int i = 0; i < numberOfPoints; i++)
+		 {
+			 coord[i] = *(p.coord + i);
+		 }
+		
 		
 
 	 }
@@ -42,43 +47,43 @@ public:
 		 std::cout << "The vertices for this point are: \n";
 		 std::cout << "(" << coord[0] << " , " << coord[1];
 	 }
-	std::string getType() {
+	std::string getType() const{
 		return type;
 	}
 
 
-	float area() {
+	float area() const {
 		return -1;
 	}
 
 
 
 
-	float circumference() {
+	float circumference() const {
 		return 0;
 	}
 
 
 
-	float * position() {
+	float * position() const {
 		
 		return coord;
 	}
 
 
 
-	bool isConvex() {
+	bool isConvex() const{
 		return true;
 	}
 
 
-	float distance(Shape *s) {
+	float distance(Shape *s) const {
 		
 		float * sCoord = s->position() + 0;
 		float d = sqrt(pow(sCoord[0] - coord[0], 2) + pow(sCoord[1] - coord[1], 2));
 		return d;
 	}
-	void print() {
+	void print() const {
 		std::cout.precision(3);
 		std::cout << "The type is: " << getType() << "\n";
 		std::cout << "The area is: " << area() << "\n";
