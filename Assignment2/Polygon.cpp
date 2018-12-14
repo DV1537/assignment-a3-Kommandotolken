@@ -23,12 +23,12 @@ public:
 	~Polygon()
 	{
 		std::cout << "Derived destructor called \n";
-		//delete[] xCoord;
-		
-		delete[] coord;
-		delete[] extraCoords;
 		delete[] xCoord;
 		delete[] yCoord;
+		delete[] coord;
+		delete[] extraCoords;
+		
+		
 	}
 	
 	Polygon() {
@@ -40,29 +40,30 @@ public:
 	}
 	void operator=(const Polygon &p)
 	{
-		this->isConv = p.isConv;
-		this->numberOfPoints = p.numberOfPoints;
-		delete[] coord;
-		this->coord = new float[numberOfPoints];
-		for (int i = 0; i < numberOfPoints; i++)
+		if (this == &p)
 		{
-			coord[i] = *(p.coord + i);
+			std::cout << "You can not do this on yourself.";
 		}
-		this->numOfSides = p.numOfSides;
-		this->polyArea = p.polyArea;
-		this->centerCoord[0] = p.centerCoord[0];
-		this->centerCoord[1] = p.centerCoord[1];
-		delete[] xCoord;
-		delete[] yCoord;
-		this->xCoord = new float[p.numberOfPoints / 2];
-		this->yCoord = new float[p.numberOfPoints / 2];
-		for (int i = 0; i < numberOfPoints; i++)
-		{
-			xCoord[i] = *(p.xCoord + i);
-			yCoord[i] = *(p.yCoord + i);
-		}
-		
+		else {
+			this->isConv = p.isConv;
+			this->numberOfPoints = p.numberOfPoints;
+			delete[] coord;
+			this->coord = new float[numberOfPoints];
+			for (int i = 0; i < numberOfPoints; i++)
+			{
+				coord[i] = p.coord[i];
+			}
+			this->numOfSides = p.numOfSides;
+			this->polyArea = p.polyArea;
+			this->centerCoord[0] = p.centerCoord[0];
+			this->centerCoord[1] = p.centerCoord[1];
+			delete[] xCoord;
+			delete[] yCoord;
+			this->xCoord = new float[p.numberOfPoints / 2];
+			this->yCoord = new float[p.numberOfPoints / 2];
 
+
+		}
 	}
 
 	void operator+(const float *plusCoord)
@@ -83,42 +84,43 @@ public:
 	}
 	void operator+(Shape &s)
 	{
+		if (this == &s)
+		{
+			std::cout << "You can not add yourself.";
+		}
+		else {
+			int otherPoints = s.getNumberOfPoints();
+			float * sCoords = new float[otherPoints];
+			std::copy(s.getCoord(), s.getCoord() + otherPoints, sCoords);
 		
-		int otherPoints = s.getNumberOfPoints();
-		float * sCoords = new float[otherPoints];
-		for (int i = 0; i < otherPoints; i++)
-		{
-			sCoords[i] = (s.getCoord()[i]);
-			std::cout << *(sCoords + i);
-		}
+			float * extraCoords = new float[numberOfPoints + otherPoints];
+			std::copy(coord, coord + numberOfPoints, extraCoords);
+			std::copy(sCoords, sCoords + otherPoints, extraCoords + numberOfPoints);
 
-		float * extraCoords = new float[numberOfPoints + otherPoints];
-		std::copy(coord, coord + numberOfPoints, extraCoords);
+			delete[] coord;
+			delete[] sCoords;
+			this->coord = extraCoords;
+			
+			this->numberOfPoints += otherPoints;
+			this->numOfSides = numberOfPoints / 2;
 
-		std::copy(sCoords, sCoords + otherPoints, extraCoords + numberOfPoints);
 
-		delete[] coord;
-		delete[] sCoords;
-		this->coord = extraCoords;
-		this->numberOfPoints += otherPoints;
-		this->numOfSides = numberOfPoints / 2;
-
-	
-		if (numberOfPoints == 2)
-		{
-			this->type = "point";
-		}
-		if (numberOfPoints == 4)
-		{
-			this->type = "line";
-		}
-		if (numberOfPoints == 6)
-		{
-			this->type = "triangle";
-		}
-		if (numberOfPoints >= 8)
-		{
-			this->type = "polygon";
+			if (numberOfPoints == 2)
+			{
+				this->type = "point";
+			}
+			if (numberOfPoints == 4)
+			{
+				this->type = "line";
+			}
+			if (numberOfPoints == 6)
+			{
+				this->type = "triangle";
+			}
+			if (numberOfPoints >= 8)
+			{
+				this->type = "polygon";
+			}
 		}
 		
 	}
