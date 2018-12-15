@@ -2,7 +2,7 @@
 #include "Shape.h"
 #include "Figure.h"
 #include "Polygon.cpp"
-/*
+
 Figure::Figure() 
 {
 
@@ -51,4 +51,4 @@ float Figure::getBoundingBox() {
 	return 2;
 }
 
-*/
+

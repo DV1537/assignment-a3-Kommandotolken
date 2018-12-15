@@ -144,6 +144,29 @@ public:
 		
 		this->xCoord = new float[numOfSides];
 		this->yCoord = new float[numOfSides];
+		int j = 0;
+		int k = 0;
+		for (int i = 0; i < numberOfPoints; i++)
+		{
+
+			if (i % 2 == 0)
+			{
+				xCoord[j] = *(coord + i);
+
+				j++;
+
+			}
+			else if (i % 2 != 0)
+			{
+
+				yCoord[k] = *(coord + i);
+
+				k++;
+
+			}
+
+
+		}
 		if (numberOfPoints == 2)
 		{
 			type = "point";
@@ -164,8 +187,7 @@ public:
 	float area() {
 
 		bool isInter;
-		int j = 0;
-		int k = 0;
+		
 		if (type == "point" || type == "line")
 		{
 			polyArea = -1;
@@ -173,27 +195,7 @@ public:
 
 		else
 		{
-			for (int i = 0; i < numberOfPoints; i++)
-			{
-
-				if (i % 2 == 0)
-				{
-					xCoord[j] = *(coord + i);
-
-					j++;
-
-				}
-				else if (i % 2 != 0)
-				{
-
-					yCoord[k] = *(coord + i);
-
-					k++;
-
-				}
-
-
-			}
+			
 			if (type == "triangle")
 			{
 				polyArea = abs((xCoord[0] * (yCoord[1] - yCoord[2]) + xCoord[1] * (yCoord[2] - yCoord[0]) + xCoord[2] * (yCoord[1] - yCoord[0]))) / 2;
